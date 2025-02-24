@@ -1,0 +1,29 @@
+# Ignorar archivos de compilación y dependencias
+target/
+bin/
+*.jar
+*.war
+*.ear
+
+# Ignorar archivos de IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+.classpath
+.project
+.settings/
+.vscode/
+
+# Ignorar archivos de configuración local
+*.properties
+*.yml
+*.log
+
+# Ignorar archivos de base de datos H2 (si usas H2 en memoria)
+*.db
+*.trace.db
+
+# Ignorar archivos del sistema
+.DS_Store
+Thumbs.db
