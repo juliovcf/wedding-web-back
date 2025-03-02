@@ -2,7 +2,6 @@ package com.yourwedding.wedding_backend.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.yourwedding.wedding_backend.dto.GuestDTO;
@@ -12,27 +11,23 @@ import com.yourwedding.wedding_backend.repository.GuestRepository;
 @Service
 public class GuestService {
 
-    @Autowired
-    private GuestRepository guestRepository;
+    private final GuestRepository guestRepository;
+
+    public GuestService(GuestRepository guestRepository) {
+        this.guestRepository = guestRepository;
+    }
 
     // Crear un nuevo invitado
     public Guest createGuest(GuestDTO guestDTO) {
         Guest guest = new Guest();
         mapDTOToEntity(guestDTO, guest);
 
-        // Si es un acompañante, buscar el invitado principal
-        if (guestDTO.getMainGuestId() != null) {
-            Guest mainGuest = guestRepository.findById(guestDTO.getMainGuestId())
-                    .orElseThrow(() -> new RuntimeException("Invitado principal no encontrado"));
-            guest.setMainGuest(mainGuest);
-        }
-
         return guestRepository.save(guest);
     }
 
     // Obtener todos los invitados principales
     public List<Guest> getAllMainGuests() {
-        return guestRepository.findByMainGuestIsNull();
+        return guestRepository.findAll();
     }
 
     // Obtener un invitado por ID
@@ -41,11 +36,15 @@ public class GuestService {
                 .orElseThrow(() -> new RuntimeException("Invitado no encontrado"));
     }
 
+    // Buscar invitados por nombre y apellido
+    public List<Guest> findGuestsByNameAndSurname(String name, String surname) {
+        return guestRepository.findByNameAndSurnameIgnoreCase(name, surname);
+    }
+
     // Convertir DTO a Entidad
     private void mapDTOToEntity(GuestDTO dto, Guest entity) {
         entity.setName(dto.getName());
         entity.setSurname(dto.getSurname());
-        entity.setEmail(dto.getEmail());
         entity.setConfirmedAttendance(dto.isConfirmedAttendance());
         entity.setDietaryRestrictions(dto.getDietaryRestrictions());
         entity.setSuggests(dto.getSuggests());

@@ -2,7 +2,6 @@ package com.yourwedding.wedding_backend.controller;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.yourwedding.wedding_backend.dto.GuestDTO;
@@ -20,8 +20,11 @@ import com.yourwedding.wedding_backend.service.GuestService;
 @RequestMapping("/api/guests")
 public class GuestController {
 
-    @Autowired
-    private GuestService guestService;
+    private final GuestService guestService;
+
+    public GuestController(GuestService guestService) {
+        this.guestService = guestService;
+    }
 
     // Crear un nuevo invitado
     @PostMapping
@@ -50,5 +53,14 @@ public class GuestController {
         } catch (RuntimeException ex) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
+    }
+
+        // Buscar invitados por nombre y apellido
+    @GetMapping("/search")
+    public ResponseEntity<List<Guest>> searchGuestsByNameAndSurname(
+            @RequestParam String name,
+            @RequestParam String surname) {
+        List<Guest> guests = guestService.findGuestsByNameAndSurname(name, surname);
+        return ResponseEntity.ok(guests);
     }
 }
