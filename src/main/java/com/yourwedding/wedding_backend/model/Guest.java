@@ -31,8 +31,8 @@ public class Guest {
     private String dietaryRestrictions;
     private String suggests;
 
-       // Relación con el grupo
-       @ManyToOne
-       @JoinColumn(name = "group_id")
-       private GuestGroup group;
+    // Relación con el grupo
+    @ManyToOne
+    @JoinColumn(name = "group_id")
+    private GuestGroup group;
 }

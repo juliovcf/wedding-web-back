@@ -13,7 +13,7 @@ public interface GuestRepository extends JpaRepository<Guest, Long> {
     // Obtener todos los invitados de un grupo
     List<Guest> findByGroupId(Long groupId);
 
-    // Buscar invitados por nombre y apellido (ignorando mayúsculas/minúsculas)
-    @Query("SELECT g FROM Guest g WHERE LOWER(g.name) LIKE LOWER(concat('%', :name, '%')) AND LOWER(g.surname) LIKE LOWER(concat('%', :surname, '%'))")
-    List<Guest> findByNameAndSurnameIgnoreCase(@Param("name") String name, @Param("surname") String surname);
+    // Buscar invitados por nombre o apellido (búsqueda flexible)
+    @Query("SELECT g FROM Guest g WHERE LOWER(g.name) LIKE LOWER(concat('%', :term, '%')) OR LOWER(g.surname) LIKE LOWER(concat('%', :term, '%'))")
+    List<Guest> findByNameOrSurnameContainingIgnoreCase(@Param("term") String term);
 }
