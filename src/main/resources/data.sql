@@ -14,44 +14,44 @@ INSERT INTO guest_group (id, name) VALUES
 SELECT setval('guest_group_id_seq', (SELECT MAX(id) FROM guest_group));
 
 -- Insertar invitados para Familia García
-INSERT INTO guest (name, surname, confirmed_attendance, kid, dietary_restrictions, suggests, group_id) VALUES
-('Juan', 'García', NULL, false, 'Sin gluten', 'Me gustaría escuchar música latina', 1),
-('María', 'García', NULL, false, NULL, NULL, 1),
-('Pedro', 'García', NULL, true, 'Alergia a frutos secos', NULL, 1),
-('Lucía', 'García', NULL, true, NULL, NULL, 1);
+INSERT INTO guest (name, surname, confirmed_attendance, kid, dietary_restrictions, suggests, bus, group_id) VALUES
+('Juan', 'García', NULL, false, 'Sin gluten', 'Me gustaría escuchar música latina', NULL, 1),
+('María', 'García', NULL, false, NULL, NULL, NULL, 1),
+('Pedro', 'García', NULL, true, 'Alergia a frutos secos', NULL, NULL, 1),
+('Lucía', 'García', NULL, true, NULL, NULL, NULL, 1);
 
 -- Insertar invitados para Familia López
-INSERT INTO guest (name, surname, confirmed_attendance, kid, dietary_restrictions, suggests, group_id) VALUES
-('Carlos', 'López', true, false, NULL, 'Me encanta el rock clásico', 2),
-('Ana', 'López', true, false, 'Vegetariana', NULL, 2),
-('Miguel', 'López', true, true, NULL, NULL, 2);
+INSERT INTO guest (name, surname, confirmed_attendance, kid, dietary_restrictions, suggests, bus, group_id) VALUES
+('Carlos', 'López', true, false, NULL, 'Me encanta el rock clásico', '20:00h', 2),
+('Ana', 'López', true, false, 'Vegetariana', NULL, '20:00h', 2),
+('Miguel', 'López', true, true, NULL, NULL, '20:00h', 2);
 
 -- Insertar invitados para Amigos del Novio
-INSERT INTO guest (name, surname, confirmed_attendance, kid, dietary_restrictions, suggests, group_id) VALUES
-('Alberto', 'Fernández', false, false, NULL, 'Música actual por favor', 3),
-('Sofía', 'Rodríguez', NULL, false, 'Intolerancia a la lactosa', NULL, 3),
-('Javier', 'Gómez', true, false, NULL, 'Me gustaría bailar salsa', 3),
-('Elena', 'Pérez', true, false, 'Vegana', NULL, 3);
+INSERT INTO guest (name, surname, confirmed_attendance, kid, dietary_restrictions, suggests, bus, group_id) VALUES
+('Alberto', 'Fernández', false, false, NULL, 'Música actual por favor', NULL, 3),
+('Sofía', 'Rodríguez', NULL, false, 'Intolerancia a la lactosa', NULL, NULL, 3),
+('Javier', 'Gómez', true, false, NULL, 'Me gustaría bailar salsa', '00:00h', 3),
+('Elena', 'Pérez', true, false, 'Vegana', NULL, '00:00h', 3);
 
 -- Insertar invitados para Amigos de la Novia
-INSERT INTO guest (name, surname, confirmed_attendance, kid, dietary_restrictions, suggests, group_id) VALUES
-('Laura', 'Martín', true, false, NULL, NULL, 4),
-('Diego', 'Sánchez', NULL, false, NULL, 'Algo de reggaeton', 4),
-('Carmen', 'Jiménez', false, false, 'Celiaca', NULL, 4);
+INSERT INTO guest (name, surname, confirmed_attendance, kid, dietary_restrictions, suggests, bus, group_id) VALUES
+('Laura', 'Martín', true, false, NULL, NULL, 'No', 4),
+('Diego', 'Sánchez', NULL, false, NULL, 'Algo de reggaeton', NULL, 4),
+('Carmen', 'Jiménez', false, false, 'Celiaca', NULL, NULL, 4);
 
 -- Insertar invitados para Familia Martínez
-INSERT INTO guest (name, surname, confirmed_attendance, kid, dietary_restrictions, suggests, group_id) VALUES
-('Roberto', 'Martínez', true, false, NULL, NULL, 5),
-('Isabel', 'Martínez', true, false, 'Sin mariscos', NULL, 5),
-('Pablo', 'Martínez', true, true, NULL, NULL, 5),
-('Daniela', 'Martínez', true, true, 'Sin lactosa', NULL, 5);
+INSERT INTO guest (name, surname, confirmed_attendance, kid, dietary_restrictions, suggests, bus, group_id) VALUES
+('Roberto', 'Martínez', true, false, NULL, NULL, 'No lo sé', 5),
+('Isabel', 'Martínez', true, false, 'Sin mariscos', NULL, 'No lo sé', 5),
+('Pablo', 'Martínez', true, true, NULL, NULL, 'No lo sé', 5),
+('Daniela', 'Martínez', true, true, 'Sin lactosa', NULL, 'No lo sé', 5);
 
 -- Insertar invitados para Compañeros de Trabajo
-INSERT INTO guest (name, surname, confirmed_attendance, kid, dietary_restrictions, suggests, group_id) VALUES
-('Marcos', 'Torres', NULL, false, NULL, 'Rock de los 80', 6),
-('Patricia', 'Ruiz', NULL, false, 'Vegetariana', NULL, 6),
-('Andrés', 'Moreno', NULL, false, NULL, NULL, 6),
-('Natalia', 'Serrano', NULL, false, 'Sin gluten', 'Música disco', 6);
+INSERT INTO guest (name, surname, confirmed_attendance, kid, dietary_restrictions, suggests, bus, group_id) VALUES
+('Marcos', 'Torres', NULL, false, NULL, 'Rock de los 80', NULL, 6),
+('Patricia', 'Ruiz', NULL, false, 'Vegetariana', NULL, NULL, 6),
+('Andrés', 'Moreno', NULL, false, NULL, NULL, NULL, 6),
+('Natalia', 'Serrano', NULL, false, 'Sin gluten', 'Música disco', NULL, 6);
 
 -- Resetear la secuencia para los IDs de guest
 SELECT setval('guest_id_seq', (SELECT MAX(id) FROM guest));
