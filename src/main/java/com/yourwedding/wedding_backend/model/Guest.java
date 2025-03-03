@@ -30,6 +30,7 @@ public class Guest {
     private boolean kid = false;
     private String dietaryRestrictions;
     private String suggests;
+    private String bus;
 
     // Relación con el grupo
     @ManyToOne

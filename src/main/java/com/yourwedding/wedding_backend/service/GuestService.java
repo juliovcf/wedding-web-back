@@ -153,5 +153,6 @@ public class GuestService {
         entity.setKid(dto.isKid());
         entity.setDietaryRestrictions(dto.getDietaryRestrictions());
         entity.setSuggests(dto.getSuggests());
+        entity.setBus(dto.getBus());
     }
 }

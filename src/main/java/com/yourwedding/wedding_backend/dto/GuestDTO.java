@@ -17,6 +17,7 @@ public class GuestDTO {
     private boolean kid;
     private String dietaryRestrictions;
     private String suggests;
+    private String bus;
 
     private Long groupGuestId; // ID del invitado principal (si es un acompañante)
 }
