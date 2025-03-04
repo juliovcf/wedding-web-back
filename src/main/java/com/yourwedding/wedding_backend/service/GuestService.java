@@ -21,6 +21,7 @@ public class GuestService {
 
     private final GuestRepository guestRepository;
     private final GuestGroupService guestGroupService;
+    private final EmailService emailService;
 
     // Crear un nuevo invitado
     public Guest createGuest(GuestDTO guestDTO) {
@@ -140,9 +141,13 @@ public class GuestService {
                 updatedGuests.add(newGuest);
             }
         }
-        
+
+        var savedGuests = guestRepository.saveAll(updatedGuests);
         System.out.println("Total de invitados a guardar: " + updatedGuests.size());
-        return guestRepository.saveAll(updatedGuests);
+
+        emailService.sendReservationUpdateNotification(savedGuests, groupId);
+
+        return savedGuests;
     }
 
     // Convertir DTO a Entidad

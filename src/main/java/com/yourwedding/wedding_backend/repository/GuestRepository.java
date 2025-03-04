@@ -16,4 +16,8 @@ public interface GuestRepository extends JpaRepository<Guest, Long> {
     // Buscar invitados por nombre o apellido (búsqueda flexible)
     @Query("SELECT g FROM Guest g WHERE LOWER(g.name) LIKE LOWER(concat('%', :term, '%')) OR LOWER(g.surname) LIKE LOWER(concat('%', :term, '%'))")
     List<Guest> findByNameOrSurnameContainingIgnoreCase(@Param("term") String term);
+
+    long countByConfirmedAttendanceTrue();
+    long countByConfirmedAttendanceFalse();
+    long countByConfirmedAttendanceIsNull();
 }
