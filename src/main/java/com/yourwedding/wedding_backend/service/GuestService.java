@@ -14,9 +14,11 @@ import com.yourwedding.wedding_backend.model.GuestGroup;
 import com.yourwedding.wedding_backend.repository.GuestRepository;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class GuestService {
 
     private final GuestRepository guestRepository;
@@ -145,7 +147,11 @@ public class GuestService {
         var savedGuests = guestRepository.saveAll(updatedGuests);
         System.out.println("Total de invitados a guardar: " + updatedGuests.size());
 
+        // Envío asíncrono del email - no bloquea la respuesta
+        log.info("Iniciando envío asíncrono de notificación para grupo #{} desde hilo {}", 
+                groupId, Thread.currentThread().getName());
         emailService.sendReservationUpdateNotification(savedGuests, groupId);
+        log.info("Llamada asíncrona de email realizada, continuando con respuesta inmediata");
 
         return savedGuests;
     }

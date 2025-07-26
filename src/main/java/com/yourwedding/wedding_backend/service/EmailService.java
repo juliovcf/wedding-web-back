@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import com.yourwedding.wedding_backend.model.Guest;
@@ -26,8 +27,10 @@ public class EmailService {
     @Value("${app.wedding.admin.email:crisgavijupeca@gmail.com}")
     private String adminEmail;
 
+    @Async("emailTaskExecutor")
     public void sendReservationUpdateNotification(List<Guest> updatedGuests, Long groupId) {
-        log.info("Preparando notificación por email para actualización del grupo #{}", groupId);
+        log.info("Preparando notificación por email ASÍNCRONA para actualización del grupo #{}", groupId);
+        log.info("Hilo actual: {}", Thread.currentThread().getName());
         log.debug("Número de invitados actualizados: {}", updatedGuests.size());
         
         try {
@@ -105,15 +108,18 @@ public class EmailService {
             log.trace("Contenido del email: \n{}", body.toString());
             
             // Send the email
-            log.info("Enviando notificación por email para el grupo {}", groupName);
+            log.info("Enviando notificación por email ASÍNCRONA para el grupo {}", groupName);
             mailSender.send(message);
-            log.info("Email enviado correctamente a {}", adminEmail);
+            log.info("Email enviado correctamente de forma ASÍNCRONA a {} desde hilo {}", 
+                    adminEmail, Thread.currentThread().getName());
         } catch (MailException e) {
-            log.error("Error al enviar el correo de notificación: {}", e.getMessage(), e);
-            // You might want to re-throw or handle this differently
-            // depending on your application's requirements
+            log.error("Error al enviar el correo de notificación ASÍNCRONA para grupo {}: {}", 
+                    groupId, e.getMessage(), e);
+            // En contexto asíncrono, podríamos guardar el error en base de datos
+            // o enviarlo a un sistema de monitoreo
         } catch (Exception e) {
-            log.error("Error inesperado al preparar o enviar el correo: {}", e.getMessage(), e);
+            log.error("Error inesperado al preparar o enviar el correo ASÍNCRONO para grupo {}: {}", 
+                    groupId, e.getMessage(), e);
         }
     }
     
