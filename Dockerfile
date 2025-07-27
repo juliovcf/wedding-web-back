@@ -1,14 +1,26 @@
-# Usar una imagen base de Java
-FROM openjdk:17-jdk-alpine
+FROM openjdk:17-jdk-slim
 
-# Directorio de trabajo en el contenedor
 WORKDIR /app
 
-# Copiar el archivo JAR de tu aplicación
-COPY target/wedding-backend-0.0.1-SNAPSHOT.jar app.jar
+# Copy Maven wrapper and pom.xml
+COPY mvnw .
+COPY .mvn .mvn
+COPY pom.xml .
 
-# Exponer el puerto en el que corre la aplicación
-EXPOSE 8585
+# Make Maven wrapper executable
+RUN chmod +x ./mvnw
 
-# Comando para ejecutar la aplicación
-ENTRYPOINT ["java", "-jar", "app.jar"]
+# Download dependencies
+RUN ./mvnw dependency:go-offline -B
+
+# Copy source code
+COPY src ./src
+
+# Build the application
+RUN ./mvnw clean package -DskipTests
+
+# Expose port
+EXPOSE 8080
+
+# Run the application
+CMD ["java", "-jar", "target/wedding-backend-0.0.1-SNAPSHOT.jar"]
