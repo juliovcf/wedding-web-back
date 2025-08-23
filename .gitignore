@@ -15,9 +15,10 @@ bin/
 .settings/
 .vscode/
 
-# Ignorar archivos de configuración local
-*.properties
-*.yml
+# Ignorar archivos de configuración local (pero permitir application.properties)
+application-local.properties
+application-dev.properties
+application-prod.properties
 *.log
 
 # Ignorar archivos de base de datos H2 (si usas H2 en memoria)
