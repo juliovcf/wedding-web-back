@@ -15,5 +15,6 @@ CREATE TABLE guest (
     suggests VARCHAR(1000),
     bus VARCHAR(255),
     group_id BIGINT NOT NULL,
+    going_by_bus BOOLEAN NOT NULL DEFAULT FALSE,
     CONSTRAINT fk_guest_group FOREIGN KEY (group_id) REFERENCES guest_group(id)
 );
