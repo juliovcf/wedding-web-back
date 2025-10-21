@@ -59,7 +59,7 @@ public class DatabaseConfig {
                     .create()
                     .url("jdbc:postgresql://localhost:5432/wedding_db")
                     .username("wedding_user")
-                    .password("wedding_pass")
+                    .password("wedding_password")
                     .driverClassName("org.postgresql.Driver")
                     .build();
         }
