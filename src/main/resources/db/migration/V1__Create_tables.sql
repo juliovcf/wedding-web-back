@@ -1,7 +1,8 @@
 -- Create guest_group table
 CREATE TABLE guest_group (
     id BIGSERIAL PRIMARY KEY,
-    name VARCHAR(255) NOT NULL
+    name VARCHAR(64) NOT NULL,
+    description VARCHAR(255),8
 );
 
 -- Create guest table
