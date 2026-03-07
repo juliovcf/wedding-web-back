@@ -55,7 +55,10 @@ public class GuestService {
         if (searchTerm == null || searchTerm.trim().isEmpty()) {
             return List.of();
         }
-        return guestRepository.findByNameOrSurnameContainingIgnoreCase(searchTerm);
+        log.info("Buscando invitados con: '{}'", searchTerm);
+        var guests = guestRepository.findByNameOrSurnameContainingIgnoreCase(searchTerm);
+        log.info("Invitados encontrados: {}", guests.size());
+        return guests;
     }
     
     // Obtener todos los invitados de un grupo
