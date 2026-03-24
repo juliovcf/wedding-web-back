@@ -24,7 +24,7 @@ public class EmailService {
     private final JavaMailSender mailSender;
     private final GuestRepository guestRepository;
     
-    @Value("${app.wedding.admin.email:crisgavijupeca@gmail.com}")
+    @Value("${app.wedding.admin.email}")
     private String adminEmail;
 
     @Async("emailTaskExecutor")
