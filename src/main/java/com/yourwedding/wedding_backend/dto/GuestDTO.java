@@ -9,7 +9,6 @@ public class GuestDTO {
     @NotBlank(message = "El nombre es obligatorio")
     private String name;
 
-    @NotBlank(message = "El apellido es obligatorio")
     private String surname;
 
 

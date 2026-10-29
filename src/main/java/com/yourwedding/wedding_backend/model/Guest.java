@@ -23,7 +23,6 @@ public class Guest {
     @NotBlank(message = "El nombre es obligatorio")
     private String name;
 
-    @NotBlank(message = "El apellido es obligatorio")
     private String surname;
     
     private Boolean confirmedAttendance = false;
